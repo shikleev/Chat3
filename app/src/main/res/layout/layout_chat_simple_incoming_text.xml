@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingEnd="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Background drawable устанавливаем из кода пр помощи CardDrawable.create()-->
+    <FrameLayout
+        android:id="@+id/fl_message_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:background="@color/cardview_shadow_start_color"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="start">
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:textColor="@color/white"
+            android:padding="10dp"
+            tools:text="qwe qwe qwe"/>
+
+    </FrameLayout>
+
+</FrameLayout>
