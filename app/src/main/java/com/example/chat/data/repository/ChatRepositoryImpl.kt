@@ -15,25 +15,24 @@ class ChatRepositoryImpl : ChatRepository {
      * Получаем информацию из цетрефуги, при необходимости объединяем потоки
      */
 
-    private val messageTime: Flow<Long> = channelFlow {
+    private val messageText: Flow<String> = channelFlow {
         repeat(100) {
             delay(1000)
-            send(System.currentTimeMillis())
+            send(UUID.randomUUID().toString())
         }
     }
-    private val messageText: Flow<String> = channelFlow {
+    private val messageId: Flow<String> = channelFlow {
         repeat(100) {
             delay(1300)
             send(UUID.randomUUID().toString())
         }
     }
 
-    override suspend fun observe(): Flow<Chat> = combine(messageTime, messageText) { time, text ->
+    override suspend fun observe(): Flow<Chat> = combine(messageText, messageId) { text, id ->
         /**
          * проделываем операции с потоками, объединяем
          */
-        Log.i("shikleev", "ChatRepositoryImpl.observe: ")
-        Chat(id = (time.toString() + text), time = time)
+        Chat(id = id + text, time = System.currentTimeMillis())
     }
 
 }

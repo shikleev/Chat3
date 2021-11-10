@@ -1,6 +1,7 @@
 package com.example.chat.presentation.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.chat.presentation.model.chat.AbsMessage
 import com.example.chat.presentation.model.chat.SimpleUserMessage
 import com.example.chat.presentation.ui.adapter.holder.*
 import androidx.recyclerview.widget.AsyncListDiffer
+import com.example.chat.presentation.model.chat.AbsMessageText
 
 
 class ChatAdapter(context: Context) : RecyclerView.Adapter<AbsChatViewHolder>() {
@@ -120,11 +122,15 @@ class ChatAdapter(context: Context) : RecyclerView.Adapter<AbsChatViewHolder>() 
 
         private val DIFF_CALLBACK: DiffUtil.ItemCallback<AbsMessage> = object : DiffUtil.ItemCallback<AbsMessage>() {
             override fun areItemsTheSame(oldItem: AbsMessage, newItem: AbsMessage): Boolean {
-                return (oldItem.id + oldItem.time) == (newItem.id + newItem.time)
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: AbsMessage, newItem: AbsMessage): Boolean {
-                return oldItem.equals(newItem)
+                if (oldItem is AbsMessageText && newItem is AbsMessageText) {
+                    return oldItem.text == newItem.text
+                            && oldItem.time == newItem.time
+                }
+                return oldItem.time == newItem.time
             }
         }
     }

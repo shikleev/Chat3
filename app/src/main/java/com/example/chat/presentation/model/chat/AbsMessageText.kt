@@ -11,6 +11,7 @@ abstract class AbsMessageText(
     time: Long,
     id: String,
     type: MessageType,
+    open var text: String?,
     backgroundColors: IntArray?,
     @ColorRes textColor: Int?,
     cornersRadius: CornersRadius?,
